@@ -1,0 +1,71 @@
+    # 图像分类训练配置
+
+    # --- 数据设置 ---
+    data_dir: "E:\\bigchuang\\数据集\\..Datav2" # 数据集目录路径 (包含 train/val 子目录)
+    num_classes: 12                 # 数据集中的类别数量 (如果不同，请更新)
+    img_size: 224                   # 输入图像尺寸
+    mean: [0.485, 0.456, 0.406]      # 归一化均值
+    std: [0.229, 0.224, 0.225]       # 归一化标准差
+
+    # --- 模型设置 ---
+    model_name: "convnextv2_tiny"   # 使用的 timm 模型库中的模型名称
+    pretrained: true                # 是否使用预训练权重
+    drop_rate: 0.1                  # 模型头部 (Head) 的 Dropout 比率
+    global_pool: "avgmax"           # 全局池化类型
+
+    # --- 训练设置 ---
+    epochs: 100                     # 总训练轮数 (epochs)
+    batch_size: 24                  # 每个批次的样本数量
+    num_workers: 4                  # 数据加载使用的工作进程数
+    device: "cuda"                  # 使用的设备 ("cuda" 或 "cpu")
+    use_amp: true                   # 是否启用自动混合精度 (AMP)
+    pin_memory: true                # 是否使用锁页内存以加速数据传输到 GPU
+    seed: 777                       # 用于可复现性的随机种子
+
+    # --- 优化器设置 ---
+    optimizer_name: "AdamW"         # 优化器名称 (目前仅实现了 AdamW 及分层学习率)
+    lr: 1.5e-4                      # 基础学习率
+    weight_decay: 0.05              # AdamW 的权重衰减
+    # 分层学习率乘数 (相对于基础学习率 lr)
+    lr_mult_stem: 0.333             # Stem 部分的学习率乘数
+    lr_mult_stage0: 0.667           # 第一个 Stage 的学习率乘数
+    lr_mult_stageN: 1.0             # 中间 Stages 的学习率乘数
+    lr_mult_head: 3.0               # 分类头 (Head) 的学习率乘数
+
+    # --- 学习率调度器设置 ---
+    scheduler_name: "cosine_warmup" # 学习率调度器类型
+    warmup_epochs: 7                # Cosine 调度器的预热 (warmup) 轮数
+    min_lr_ratio: 0.01              # Cosine 调度器的最小学习率比例 (相对于初始 LR)
+
+    # --- 数据增强设置 ---
+    use_mixup: true                 # 是否启用 Mixup/CutMix 数据增强
+    mixup_alpha: 0.8                # Mixup 的 alpha 参数
+    cutmix_alpha: 1.0               # CutMix 的 alpha 参数
+    mixup_prob: 0.1                 # 应用 Mixup/CutMix 的概率
+    mixup_switch_prob: 0.5          # 从 Mixup 切换到 CutMix 的概率
+    label_smoothing: 0.1            # 标签平滑值 (与 Mixup/SoftTargetCrossEntropy 一起使用)
+    randaugment_num_ops: 2          # RandAugment: 操作的数量
+    randaugment_magnitude: 9        # RandAugment: 操作的强度
+    use_random_blur: true           # 是否应用随机高斯模糊
+    random_blur_prob: 0.5           # 应用随机模糊的概率
+
+    # --- EMA (指数移动平均) 设置 ---
+    use_ema: true                   # 是否启用模型指数移动平均
+    ema_decay: 0.9999               # EMA 的衰减因子
+
+    # --- 早停 (Early Stopping) 设置 ---
+    use_early_stopping: true        # 是否启用早停
+    early_stopping_patience: 20     # 验证集性能不再提升时，等待的轮数
+
+    # --- 检查点 (Checkpoint) 设置 ---
+    checkpoint_dir: "checkpoints"   # 保存模型检查点的目录
+    resume_path: null               # 指定用于恢复训练的检查点路径 (例如: "checkpoints/best_model.pth")
+                                    # 如果为 null，则尝试加载 checkpoint_dir 中最新的检查点
+
+    # --- 日志设置 ---
+    log_dir: "logs"                 # 保存训练日志和 TensorBoard 文件的目录
+    tensorboard_subdir: "experiment_1" # TensorBoard 运行数据在 log_dir 内的子目录名称
+    log_interval: 10                # 每 N 个 epoch 记录一次指标 (当前代码主要在每个 epoch 后记录)
+    save_confusion_matrix_interval: 5 # 每 N 个 epoch 保存一次混淆矩阵
+    save_augmented_images_interval: 10 # 每 N 个 epoch 保存一次增强后的图像样本
+

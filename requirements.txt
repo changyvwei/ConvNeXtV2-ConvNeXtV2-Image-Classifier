@@ -1,0 +1,13 @@
+torch>=1.10.0 # or your specific torch version
+torchvision>=0.11.1 # or your specific torchvision version
+timm>=0.6.12 # or a newer version of timm
+numpy>=1.19.0
+PyYAML>=5.4.0 # for parsing config.yaml
+scikit-learn>=0.24.0 # for calculating confusion matrix
+seaborn>=0.11.0 # for plotting confusion matrix
+matplotlib>=3.3.0 # for plotting
+tqdm>=4.60.0 # for displaying progress bars
+tensorboard>=2.8.0 # for logging
+
+# Optional, if using specific hardware acceleration:
+cupy-cuda11x # If using CUDA 11.x and want to use CuPy acceleration (check compatibility)
