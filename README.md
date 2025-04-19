@@ -120,3 +120,4 @@ python main.py \--resume-path checkpoints/你的检查点.pth
 ## **🙏 贡献**
 
 欢迎贡献！请随时提交 Pull Request 或开启 Issue。
+个人邮箱：1165325394@qq.com
