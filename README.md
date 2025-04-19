@@ -35,7 +35,7 @@ github-image-classifier/
 │   ├── utils.py        \# 工具函数 (种子, EMA, 早停, 日志, 检查点)  
 │   └── scheduler.py    \# 学习率调度器函数  
 ├── requirements.txt    \# 项目依赖  
-├── README.md           \# 本文档 
+├── README.md           \# 本文档  
 ├── logs/               \# 默认日志目录 (自动创建)  
 └── checkpoints/        \# 默认模型检查点目录 (自动创建)
 
