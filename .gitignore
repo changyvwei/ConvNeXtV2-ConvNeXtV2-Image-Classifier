@@ -1,0 +1,38 @@
+*.pyc
+__pycache__/
+
+# Ignore directories created during training
+# Logs directory
+logs/
+# Model checkpoints directory
+checkpoints/
+
+# Ignore virtual environment directory
+# Adjust the name if you used a different name for your venv
+venv/
+.env/
+
+# Ignore dataset directory if it's not part of the repo
+# Replace <your_data_directory> with the actual name if needed
+# <你的数据目录>/ # Uncomment and replace if you put data inside the project folder
+
+# Ignore editor and IDE files
+.vscode/
+.idea/
+
+# Ignore operating system files
+.DS_Store
+Thumbs.db
+
+# Ignore ipython notebooks checkponts
+.ipynb_checkpoints
+
+# Ignore build artifacts
+dist/
+build/
+*.egg-info/
+
+# Ignore any files containing sensitive information (e.g., API keys)
+# Add specific file names here if applicable
+# secrets.yaml
+# config/credentials.ini
