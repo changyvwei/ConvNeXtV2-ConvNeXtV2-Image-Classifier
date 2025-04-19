@@ -1,7 +1,7 @@
     # 图像分类训练配置
 
     # --- 数据设置 ---
-    data_dir: "E:\\bigchuang\\数据集\\..Datav2" # 数据集目录路径 (包含 train/val 子目录)
+    data_dir: "Database"            # 数据集目录路径 (包含 train/val 子目录)
     num_classes: 12                 # 数据集中的类别数量 (如果不同，请更新)
     img_size: 224                   # 输入图像尺寸
     mean: [0.485, 0.456, 0.406]      # 归一化均值
